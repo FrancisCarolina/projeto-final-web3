@@ -47,7 +47,7 @@
                             <a href="{{ route('clients.show', $client->id) }}" class="btn btn-info btn-sm" title="Informações">
                                 <i class="bi bi-info-circle"></i>
                             </a>
-                            <a href="" class="btn btn-warning btn-sm" title="Editar">
+                            <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-warning btn-sm" title="Editar">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $client->id }}" title="Excluir">

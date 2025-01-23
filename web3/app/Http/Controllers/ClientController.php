@@ -64,48 +64,45 @@ class ClientController extends Controller
         return view('clients.show', compact('client'));
     }
 
-    /**
-     * Atualizar os dados de um cliente.
-     */
-    public function update(Request $request, $id)
+    // Exibe o formulário de edição
+    public function edit(Client $client)
     {
-        $client = Client::find($id);
+        return view('clients.edit', compact('client'));
+    }
 
-        if (!$client) {
-            return response()->json(['message' => 'Cliente não encontrado'], 404);
-        }
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'nullable|string|max:255',
-            'phone' => 'nullable|regex:/^[0-9]+$/|max:15',
-            'cpf' => 'nullable|regex:/^[0-9]{11}$/|unique:clients,cpf,' . $id,
-            'email' => 'nullable|email|unique:clients,email,' . $id,
-            'address.cep' => 'nullable|string|max:9',
-            'address.street' => 'nullable|string|max:255',
-            'address.neighborhood' => 'nullable|string|max:255',
-            'address.city' => 'nullable|string|max:255',
-            'address.state' => 'nullable|string|max:2',
-            'address.number' => 'nullable|string|max:10',
-            'address.complement' => 'nullable|string|max:255',
+    // Atualiza os dados do cliente
+    public function update(Request $request, Client $client)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:15',
+            'cpf' => 'nullable|string|max:14',
+            'email' => 'nullable|email|max:255',
+            'street' => 'nullable|string|max:255',
+            'number' => 'nullable|string|max:10',
+            'neighborhood' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'state' => 'nullable|string',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
+        // Atualiza os dados do cliente
+        $client->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'cpf' => $request->cpf,
+            'email' => $request->email,
+        ]);
 
-        try {
-            // Atualizar endereço, se fornecido
-            if ($request->has('address')) {
-                $client->address->update($request->address);
-            }
+        // Atualiza o endereço, se fornecido
+        $client->address->update([
+            'street' => $request->street,
+            'number' => $request->number,
+            'neighborhood' => $request->neighborhood,
+            'city' => $request->city,
+            'state' => $request->state,
+        ]);
 
-            // Atualizar cliente
-            $client->update($request->only(['name', 'phone', 'cpf', 'email']));
-
-            return response()->json(['message' => 'Cliente atualizado com sucesso!', 'client' => $client]);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Erro ao atualizar cliente', 'error' => $e->getMessage()], 500);
-        }
+        return redirect()->route('clients.show', $client->id)->with('success', 'Cliente atualizado com sucesso.');
     }
 
     /**

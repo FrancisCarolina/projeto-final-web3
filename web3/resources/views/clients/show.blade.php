@@ -35,7 +35,7 @@
                 </p>
             </div>
             <div class="card-footer text-end">
-                <a href="" class="btn btn-warning">
+                <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-warning">
                     <i class="bi bi-pencil-square"></i> Editar
                 </a>
                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $client->id }}">
