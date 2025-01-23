@@ -58,15 +58,10 @@ class ClientController extends Controller
     /**
      * Exibir detalhes de um cliente específico.
      */
-    public function show($id)
+    public function show(Client $client)
     {
-        $client = Client::with('address')->find($id);
-
-        if (!$client) {
-            return response()->json(['message' => 'Cliente não encontrado'], 404);
-        }
-
-        return response()->json($client);
+        // Passa o cliente para a view
+        return view('clients.show', compact('client'));
     }
 
     /**

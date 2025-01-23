@@ -44,7 +44,7 @@
                         <td>{{ $client->phone }}</td>
                         <td>
                             <!-- Ícones de Ação -->
-                            <a href="" class="btn btn-info btn-sm" title="Informações">
+                            <a href="{{ route('clients.show', $client->id) }}" class="btn btn-info btn-sm" title="Informações">
                                 <i class="bi bi-info-circle"></i>
                             </a>
                             <a href="" class="btn btn-warning btn-sm" title="Editar">
