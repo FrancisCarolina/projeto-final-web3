@@ -47,37 +47,8 @@
                             <a href="{{ route('clients.show', $client->id) }}" class="btn btn-info btn-sm" title="Informações">
                                 <i class="bi bi-info-circle"></i>
                             </a>
-                            <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-warning btn-sm" title="Editar">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $client->id }}" title="Excluir">
-                                <i class="bi bi-trash"></i>
-                            </button>
                         </td>
                     </tr>
-
-                    <!-- Modal de confirmação de exclusão -->
-                    <div class="modal fade" id="deleteModal{{ $client->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $client->id }}" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteModalLabel{{ $client->id }}">Confirmar Exclusão</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    Tem certeza de que deseja excluir este cliente?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <form action="" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Excluir</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     @endforeach
                 </tbody>
             </table>
