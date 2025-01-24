@@ -34,6 +34,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('stock_withdrawals.index') }}">Vendas</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('reports.index') }}">Relatorios</a>
+                    </li>
                 </ul>
             </div>
         </div>
