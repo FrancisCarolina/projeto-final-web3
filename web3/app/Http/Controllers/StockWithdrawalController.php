@@ -41,9 +41,20 @@ class StockWithdrawalController extends Controller
 
         Log::info('VALIDAÇÃO', ['validated' => $validated]);
 
+        // Verificar a disponibilidade de estoque para todos os produtos
+        foreach ($validated['products'] as $productData) {
+            $product = Produto::find($productData['id']);
+            if ($product->estoque < $productData['quantity']) {
+                // Retorna com um erro se algum produto não tiver estoque suficiente
+                return back()->withErrors([
+                    'products' => "Quantidade insuficiente no estoque para o produto {$product->nome}.",
+                ]);
+            }
+        }
 
         try {
             DB::transaction(function () use ($validated) {
+                // Criar a baixa no estoque
                 $withdrawal = StockWithdrawal::create([
                     'client_id' => $validated['client_id'],
                     'withdrawal_date' => now(),
@@ -54,18 +65,15 @@ class StockWithdrawalController extends Controller
 
                 foreach ($validated['products'] as $productData) {
                     $product = Produto::find($productData['id']);
-                    if ($product->estoque < $productData['quantity']) {
-                        throw ValidationException::withMessages([
-                            'products' => "Quantidade insuficiente no estoque para o produto {$product->nome}.",
-                        ]);
-                    }
-
+                    // Atualiza o estoque do produto
                     $product->estoque -= $productData['quantity'];
                     $product->save();
 
+                    // Calcula o valor total
                     $value = $product->valor_unitario * $productData['quantity'];
                     $totalValue += $value;
 
+                    // Cria o registro de produto associado à baixa no estoque
                     WithdrawalProduct::create([
                         'stock_withdrawal_id' => $withdrawal->id,
                         'product_id' => $product->id,
@@ -74,6 +82,7 @@ class StockWithdrawalController extends Controller
                     ]);
                 }
 
+                // Atualiza o valor total da baixa
                 $withdrawal->update(['total_value' => $totalValue]);
             });
 
