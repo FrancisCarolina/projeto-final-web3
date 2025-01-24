@@ -20,10 +20,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
+                        <a class="nav-link" href="{{ route('clients.index') }}">Clients</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('categories.create') }}">Create Category</a>
+                        <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
                     </li>
                 </ul>
             </div>
