@@ -31,6 +31,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('produtos.index') }}">Produtos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('stock_withdrawals.index') }}">Vendas</a>
+                    </li>
                 </ul>
             </div>
         </div>
