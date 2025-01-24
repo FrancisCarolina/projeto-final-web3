@@ -92,4 +92,10 @@ class StockWithdrawalController extends Controller
             return back()->with('error', 'Erro ao registrar a baixa no estoque: ' . $e->getMessage());
         }
     }
+    public function show($id)
+    {
+        $withdrawal = StockWithdrawal::with('client', 'withdrawalProducts.product')->findOrFail($id);
+
+        return view('stock_withdrawals.show', compact('withdrawal'));
+    }
 }

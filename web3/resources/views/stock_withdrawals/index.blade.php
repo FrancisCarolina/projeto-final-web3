@@ -33,6 +33,7 @@
                     <th>Cliente</th>
                     <th>Data de Baixa</th>
                     <th>Valor Total</th>
+                    <th>Detalhes</th> <!-- Nova coluna para o link de detalhes -->
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +42,12 @@
                     <td>{{ $withdrawal->client->name }}</td>
                     <td>{{ $withdrawal->withdrawal_date }}</td>
                     <td>{{ number_format($withdrawal->total_value, 2, ',', '.') }}</td>
+                    <td>
+                        <!-- Link para a página de detalhes -->
+                        <a href="{{ route('stock_withdrawals.show', $withdrawal->id) }}" class="btn btn-info">
+                            <i class="bi bi-info-circle"></i>
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
