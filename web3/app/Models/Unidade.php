@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;  // Importa SoftDeletes
 
 class Unidade extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;  // Adiciona SoftDeletes
 
     protected $fillable = [
         'sigla',
         'descricao',
     ];
-
-    // Custom validation rules can be placed in the controller
 }

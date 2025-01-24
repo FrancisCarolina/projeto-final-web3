@@ -31,7 +31,7 @@ class Produto extends Model
     // Relacionamento com a unidade de medida
     public function unidadeMedida()
     {
-        return $this->belongsTo(Unidade::class);
+        return $this->belongsTo(Unidade::class)->withTrashed();
     }
 
     // Função para salvar a imagem
