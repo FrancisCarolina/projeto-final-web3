@@ -14,7 +14,8 @@ class ReportController extends Controller
     // Exibe a página de seleção de relatórios
     public function index()
     {
-        return view('reports.index');
+        $clients = Client::all(); // Obtém todos os clientes
+        return view('reports.index', compact('clients'));
     }
 
     // Gera o relatório com base no tipo selecionado
