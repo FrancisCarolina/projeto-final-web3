@@ -28,6 +28,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('unidades.index') }}">Unidades</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('produtos.index') }}">Produtos</a>
+                    </li>
                 </ul>
             </div>
         </div>
