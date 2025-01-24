@@ -16,6 +16,6 @@ class WithdrawalProduct extends Model
 
     public function product()
     {
-        return $this->belongsTo(Produto::class, 'product_id');
+        return $this->belongsTo(Produto::class)->withTrashed();
     }
 }
