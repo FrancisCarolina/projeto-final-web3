@@ -1,7 +1,6 @@
 <?php
 
 // app/Models/Produto.php
-
 // app/Models/Produto.php
 namespace App\Models;
 
@@ -23,10 +22,10 @@ class Produto extends Model
         'valor_unitario',
     ];
 
-    // Relacionamento com a categoria
+    // Relacionamento com a categoria, incluindo categorias excluídas
     public function categoria()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->withTrashed();  // Inclui categorias excluídas
     }
 
     // Relacionamento com a unidade de medida
