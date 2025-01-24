@@ -32,7 +32,7 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Descrição</label>
-                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Descrição"></textarea>
+                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Descrição" required></textarea>
             </div>
 
             <!-- Botão de submissão -->
