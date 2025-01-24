@@ -18,6 +18,7 @@
         <table class="table table-bordered table-hover">
             <thead class="table-dark">
                 <tr>
+                    <th>Imagem</th> <!-- Nova coluna para imagem -->
                     <th>Nome</th>
                     <th>Categoria</th>
                     <th>Unidade</th>
@@ -29,6 +30,14 @@
             <tbody>
                 @foreach ($produtos as $produto)
                 <tr>
+                    <!-- Exibindo a imagem -->
+                    <td>
+                        @if ($produto->caminho_imagem)
+                        <img src="{{ asset($produto->caminho_imagem) }}" alt="Imagem do produto" width="200">
+                        @else
+                        <span>Sem Imagem</span>
+                        @endif
+                    </td>
                     <td>{{ $produto->nome }}</td>
                     <td>{{ $produto->categoria->name }}</td>
                     <td>{{ $produto->unidadeMedida->sigla }}</td>
